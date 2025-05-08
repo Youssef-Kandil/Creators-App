@@ -8,6 +8,22 @@ eas build --platform ios
 npx expo start --dev-client
 
 
+eas build --platform android --profile preview
+eas build --platform android --profile production
+eas build --platform ios --profile production
+eas build --profile development --platform android
+
+
+git status
+git add .
+git commit -m "وصف التغييرات التي أجريتها"
+git push origin main
+  git branch
+  git remote -v
+
+
+
+
 
 Press s │ switch to development build
 
