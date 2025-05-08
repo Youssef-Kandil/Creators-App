@@ -1,0 +1,25 @@
+sudo rm -rf ~/.expo
+npx expo start -c
+
+
+eas build --platform android
+eas build --platform ios
+
+npx expo start --dev-client
+
+
+
+Press s │ switch to development build
+
+› Press a │ open Android
+› shift+a │ select an Android device or emulator
+› Press i │ open iOS simulator
+› shift+i │ select an iOS simulator
+› Press w │ open web
+
+› Press r │ reload app
+› Press j │ open debugger
+› Press m │ toggle menu
+› shift+m │ more tools
+› Press o │ open project code in your editor
+› Press c │ show project QR

@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "creators-app",
+    "slug": "creators-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "creatorsapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "ExpoLocalization_supportsRTL": true,
+        "ExpoLocalization_forcesRTL": true
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.creatorsapps.creatorsapp"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-localization"
+    ],
+    "extra": {
+      "supportsRTL": true,
+      "forcesRTL": true,
+      "eas": {
+        "projectId": "4cb59ba4-ac60-4b41-b751-6c8499a9187f"
+      }
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "owner": "creators-apps"
+  }
+}
