@@ -22,7 +22,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 import FormTitleComponent from '@/components/FormTitleComponent';
 import InputComponent from '@/components/InputComponent';
-
+ import LocalStorage from '@/utils/LocalStorage';
 
 const Login = () => {
       const router = useRouter();
@@ -36,7 +36,30 @@ const Login = () => {
         const [email,setEmail] = useState<string>("")
         const [password,setPassword] = useState<string>("")
 
+        // === Check User Is Already Loged In Or Not ===
+        const [isLogedIn, setIsLogedIn] = React.useState<number| null >(null)
+        React.useEffect(() => {
+            const fetchUserType = async () => {
+            const isLogedIn = await LocalStorage.loadData("isLogedIn");
+                if(isLogedIn !== null){
+                      setIsLogedIn(Number(isLogedIn))
+                  }
+                if (Number(isLogedIn) === 1) {
+                      router.replace('/(tabs)/Home')
+                }
+               };
+              fetchUserType();
+            }, []);
+
+
+
         function handelLogin(){
+            if(email.length > 0 && password.length > 0){
+                LocalStorage.SaveData("isLogedIn","1")
+                router.replace('/(tabs)/Home')
+            }else{
+                alert("الرجاء إدخال جميع المعلومات")
+            }
 
         }
 
@@ -70,7 +93,7 @@ const Login = () => {
                 <Link push href={'/Auth/Forget_password'} style={[{color:themeColors.subTextColor, fontSize:moderateScale_Font(14),textAlign:"left"}]}>نسيت كلمه المرور؟</Link>
             </View>
         {/* ===== START BUTTON ===== */}
-        <TouchableOpacity style={{width:"100%",marginTop:verticalScale_hights(20)}}>
+        <TouchableOpacity onPress={handelLogin} style={{width:"100%",marginTop:verticalScale_hights(20)}}>
             <View style={[styles.btn,{backgroundColor:themeColors.Primary}]}>
                 <Text style={[styles.btnTitle]}>تسجيل دخول</Text>
             </View>

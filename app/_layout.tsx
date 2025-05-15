@@ -9,7 +9,10 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 
+import { usePathname } from 'expo-router';
+
 import { useColorScheme } from '@/components/useColorScheme';
+import { Platform } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -53,6 +56,8 @@ export default  function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const pathname = usePathname();
+  console.log(Platform.OS,pathname)
 
   return (
     <ThemeProvider  value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

@@ -89,7 +89,7 @@ const SearchScreen = () => {
                     value={SearchInput}
                     onTyping={(text)=>{setSearchInput(text)}}
                     onClick={()=>{}}
-                    onSubmitEditing={()=>router.navigate({pathname:'/(tabs)',params:{searchText:SearchInput}})}
+                    onSubmitEditing={()=>router.push({pathname:'/(tabs)/Home',params:{searchText:SearchInput}})}
                     keyboardType="web-search"
                 />   
             </View>

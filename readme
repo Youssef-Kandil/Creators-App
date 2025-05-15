@@ -22,6 +22,18 @@ git push origin main
   git remote -v
 
 
+  git checkout -b feature/new-feature
+  git checkout -b feature/new-feature origin/feature/new-feature
+
+/index.ts 
+  => (if this is a first time) : /Onboarding
+                                    =>  (if this is a second time) : /Auth/Login
+                                    => (if user Complete Onboarding) : /Register/ChooseAcountType
+  => (if this is a second time) : /Auth/Login
+                                    => (if the user already logged in) : /(tabs)
+
+
+
 
 
 

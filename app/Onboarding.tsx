@@ -18,7 +18,7 @@ import {darkThem ,lightThem} from '@/Config/app_identity'
 import { scale_width,verticalScale_hights,moderateScale_Font } from '@/utils/responsive'
 import { useWindowDimensions } from 'react-native';
 
-
+import LocalStorage from '@/utils/LocalStorage';
 
 
 const Onboarding = () => {
@@ -29,6 +29,24 @@ const Onboarding = () => {
 
     const { width, height } = useWindowDimensions();
     const paddingTop = Platform.OS === 'android' ? StatusBar.currentHeight : 50;
+  
+    // ==== Check IF The User Open The App On First Time
+    const [isOnboarding, setIsOnboarding] = React.useState<number| null >(null)
+    React.useEffect(() => {
+        const fetchUserType = async () => {
+        const IsOnboarding = await LocalStorage.loadData("Onboarding");
+            if(IsOnboarding !== null){
+                  setIsOnboarding(Number(IsOnboarding))
+              }
+            if (Number(IsOnboarding) === 1) {
+                  router.replace('/Auth/Login')   
+            }
+           };   
+           fetchUserType();
+        }, []);
+
+
+      
 
     const [currentStep,setCurrentStep] = React.useState<number>(0)
     const dotsAnim = React.useRef(
@@ -55,7 +73,8 @@ const Onboarding = () => {
       })
     }, [currentStep])
 
-    const handelGoToCreateAccountScreen =()=>{
+    const handelGoToCreateAccountScreen = async ()=>{
+      await LocalStorage.SaveData("Onboarding","1");
       router.replace("/Register/chooseAccountType")
     }
 

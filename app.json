@@ -15,6 +15,7 @@
     },
     "ios": {
       "buildNumber": "2" ,
+       "bundleIdentifier": "com.creatorsapps.creatorsapp",
       "supportsTablet": true,
       "infoPlist": {
         "ExpoLocalization_supportsRTL": true,

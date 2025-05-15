@@ -32,7 +32,7 @@ const UserHomeScreen = () => {
 
   return (
     <View >
-      
+      <Text>Welcome to User Home Screen</Text>
     </View>
   )
 }

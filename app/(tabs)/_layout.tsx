@@ -210,7 +210,7 @@ function UserUi_Tabs(){
         }}
       />
 
-    <Tabs.Screen name="index"
+    <Tabs.Screen name="Home"
         options={{
           title: 'الرئيسيه',
           tabBarIcon: ({ color ,focused }) => <Home width={scale_width(40)} height={verticalScale_hights(30)} fill={focused?lightThem.Primary:"#6B7280"}  />,
