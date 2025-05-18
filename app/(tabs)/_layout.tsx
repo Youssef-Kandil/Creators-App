@@ -74,7 +74,7 @@ function CreatorUi_Tabs(){
             tabBarIcon: ({ color, focused }) => <User width={scale_width(40)} height={verticalScale_hights(30)} stroke={focused?(colorScheme == "dark"?"#000":"#fff"):(colorScheme == "dark"?"#000":"#fff")} strokeWidth={0.5}  fill={focused?lightThem.Primary:"#6B7280"}  />,
           }}
         />
-        <Tabs.Screen name="Notifications"
+        <Tabs.Screen name="Messages"
           options={{
             title: 'الرسائل',
             tabBarIcon: ({ color, focused }) => <Msg width={scale_width(40)} height={verticalScale_hights(30)} stroke={focused?(colorScheme == "dark"?"#000":"#fff"):(colorScheme == "dark"?"#000":"#fff")} fill={focused?lightThem.Primary:"#6B7280"}  />,
@@ -156,7 +156,7 @@ function UserUi_Tabs(){
             tabBarIcon: ({ color, focused }) => <User width={scale_width(40)} height={verticalScale_hights(30)} stroke={focused?(colorScheme == "dark"?"#000":"#fff"):(colorScheme == "dark"?"#000":"#fff")} strokeWidth={0.5}  fill={focused?lightThem.Primary:"#6B7280"}  />,
           }}
         />
-        <Tabs.Screen name="Notifications"
+        <Tabs.Screen name="Messages"
           options={{
             title: 'الرسائل',
             tabBarIcon: ({ color, focused }) => <Msg width={scale_width(40)} height={verticalScale_hights(30)} stroke={focused?(colorScheme == "dark"?"#000":"#fff"):(colorScheme == "dark"?"#000":"#fff")} fill={focused?lightThem.Primary:"#6B7280"}  />,
@@ -203,7 +203,7 @@ function UserUi_Tabs(){
         }}
       />
 
-      <Tabs.Screen name="Orders"
+      <Tabs.Screen name="Jobs"
         options={{
           title: 'طلبات',
           tabBarIcon: ({ color, focused }) => <Sheet width={scale_width(40)} height={verticalScale_hights(30)} stroke={focused?(colorScheme == "dark"?"#000":"#fff"):(colorScheme == "dark"?"#000":"#fff")} fill={focused?lightThem.Primary:"#6B7280"}  />,

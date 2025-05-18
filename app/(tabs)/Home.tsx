@@ -87,7 +87,7 @@ export default function TabOneScreen() {
               </View>
             </View>
             {/* START NOTIFICATION CONTAINER */}
-            <View>
+            <View onTouchEnd={()=>router.push('/UI/(global_UI)/Notifications')}>
               <NotificationsIcon width={verticalScale_hights(45)} height={verticalScale_hights(45)} fill={themeColors.cardBackground}/>
             </View>
           </View>

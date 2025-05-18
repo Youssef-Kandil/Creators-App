@@ -74,6 +74,7 @@ function RootLayoutNav() {
         <Stack.Screen name="Auth/CreateNewPassword" options={{headerShown: false,animation:'ios_from_left' }} />
         <Stack.Screen name="Auth/OTP" options={{headerShown: false,animation:'ios_from_left' }} />
 
+        <Stack.Screen name="UI/(global_UI)/Notifications" options={{headerShown: false,animation:'slide_from_bottom' }} />
         <Stack.Screen name="UI/(global_UI)/SearchScreen" options={{headerShown: false,animation:'slide_from_bottom' }} />
       </Stack>
     </ThemeProvider>

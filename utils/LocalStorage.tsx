@@ -13,7 +13,6 @@ class LocalStorage {
         try {
             const value = await AsyncStorage.getItem(`${key}`);
             if (value !== null) {
-                console.log('User Type:', value);
                 return value
             }
         } catch (e) {

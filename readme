@@ -21,6 +21,8 @@ git push origin main
   git branch
   git remote -v
 
+  git log --oneline --graph --all --decorate
+
 
   git checkout -b feature/new-feature
   git checkout -b feature/new-feature origin/feature/new-feature

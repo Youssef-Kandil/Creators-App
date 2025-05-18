@@ -20,9 +20,9 @@ import { useWindowDimensions } from 'react-native';
 
 
 import HeaderTitle from '@/components/HeaderTitle';
+import IconInputComponent from '@/components/IconInputComponent';
 
-
-const Account = () => {
+const Jobs = () => {
   const theme = useColorScheme()
   const isDark = theme === 'dark';
   const themeColors = isDark ? darkThem : lightThem;    
@@ -38,11 +38,15 @@ return (
     marginTop: verticalScale_hights(30),
      width:width, height:height}
   ]} >
-    <HeaderTitle title="الحساب" />
+    <HeaderTitle title="طلبات" />
+    <IconInputComponent
+      placeholder='ابحث عن خدمة'
+      value=''
+      onClick={()=>{}}
+    />
     
 </View>
 )
 }
 
-
-export default Account
+export default Jobs

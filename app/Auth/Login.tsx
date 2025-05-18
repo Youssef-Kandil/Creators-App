@@ -37,14 +37,19 @@ const Login = () => {
         const [password,setPassword] = useState<string>("")
 
         // === Check User Is Already Loged In Or Not ===
+            const [isCreator, setIsCreator] = React.useState<number| null >(null)
         const [isLogedIn, setIsLogedIn] = React.useState<number| null >(null)
         React.useEffect(() => {
             const fetchUserType = async () => {
-            const isLogedIn = await LocalStorage.loadData("isLogedIn");
+                const userType = await LocalStorage.loadData('userType');
+                if(userType !== null){
+                  setIsCreator(Number(userType))
+                }
+                const isLogedIn = await LocalStorage.loadData("isLogedIn");
                 if(isLogedIn !== null){
                       setIsLogedIn(Number(isLogedIn))
                   }
-                if (Number(isLogedIn) === 1) {
+                if (Number(isLogedIn) === 1 && userType ) {
                       router.replace('/(tabs)/Home')
                 }
                };
@@ -54,7 +59,7 @@ const Login = () => {
 
 
         function handelLogin(){
-            if(email.length > 0 && password.length > 0){
+            if(email.length > 0 && password.length > 0 && isCreator){
                 LocalStorage.SaveData("isLogedIn","1")
                 router.replace('/(tabs)/Home')
             }else{
