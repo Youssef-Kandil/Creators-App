@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
+    "@react-native-async-storage/async-storage": "2.1.2",
     "@react-navigation/native": "^7.1.6",
     "expo": "~53.0.6",
+    "expo-dev-client": "~5.1.8",
     "expo-font": "~13.3.1",
     "expo-linking": "~7.1.4",
     "expo-localization": "~16.1.5",
@@ -26,9 +28,12 @@
     "expo-system-ui": "~5.0.7",
     "expo-updates": "~0.28.12",
     "expo-web-browser": "~14.1.6",
+    "intersection": "^0.0.1",
+    "link-preview-js": "^3.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.2",
+    "react-native-intersection-observer": "^0.2.1",
     "react-native-reanimated": "~3.17.4",
     "react-native-restart": "^0.0.27",
     "react-native-safe-area-context": "5.4.0",
@@ -36,8 +41,7 @@
     "react-native-svg": "15.11.2",
     "react-native-svg-transformer": "^1.5.1",
     "react-native-web": "~0.20.0",
-    "@react-native-async-storage/async-storage": "2.1.2",
-    "expo-dev-client": "~5.1.8"
+    "@react-native-community/datetimepicker": "8.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

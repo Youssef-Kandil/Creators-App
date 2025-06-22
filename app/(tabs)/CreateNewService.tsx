@@ -19,10 +19,32 @@ import { scale_width,verticalScale_hights,moderateScale_Font } from '@/utils/res
 import { useWindowDimensions } from 'react-native';
 
 
+import LocalStorage from '@/utils/LocalStorage';
+
+
+
+import UserCreateNewOrder from '../UI/(User_UI)/UserCreateNewOrder';
+import CreatorHomeScreen from '../UI/(Creator_UI)/UsefHome';
+
+
 import HeaderTitle from '@/components/HeaderTitle';
 import IconInputComponent from '@/components/IconInputComponent';
 
 const CreateNewService = () => {
+    const router = useRouter()
+  
+      const [isCreator, setIsCreator] = React.useState<number| null >(null)
+    
+      React.useEffect(() => {
+        const fetchUserType = async () => {
+          const userType = await LocalStorage.loadData('userType');
+          if(userType !== null){
+            setIsCreator(Number(userType))
+          }
+        };
+      
+        fetchUserType();
+      }, []);
   const theme = useColorScheme()
   const isDark = theme === 'dark';
   const themeColors = isDark ? darkThem : lightThem;    
@@ -38,8 +60,12 @@ return (
     marginTop: verticalScale_hights(30),
      width:width, height:height}
   ]} >
-    <HeaderTitle title="إنشاء خدمة جديدة" />
-    
+    <HeaderTitle isTab={true}  title="إنشاء خدمة جديدة" />
+    {/* STRAT PAGE CONTENT */}
+    <View style={{alignSelf:"center"}}>
+      {isCreator?null:<UserCreateNewOrder/>}
+
+    </View>
 </View>
 )
 }

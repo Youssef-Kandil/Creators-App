@@ -46,8 +46,8 @@ export default function TabOneScreen() {
     }, []);
 
 
-    console.log("from SearchInput : ",searchText)
-    console.log("from index : ",isCreator)
+    console.log("from SearchInput : ",searchText);
+    console.log("from index : ",isCreator);
 
 
       const theme = useColorScheme()

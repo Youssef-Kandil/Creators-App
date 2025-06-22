@@ -32,7 +32,8 @@ const All = () => {
           }}>
             {[1, 2, 3, 4].map((_, index) => {
               return(
-                <CompaniesCardComponent 
+                <CompaniesCardComponent
+                      key={index} 
                       imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
                       profileImgUrl={require("@/assets/images/Test/Profil.png") as ImageSourcePropType}
                       fullName='محمد أحمد'
@@ -57,7 +58,8 @@ const All = () => {
             {[1, 2, 3, 4].map((_, index) => {
               return(
                 <CreatorCardComponent 
-                imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
+                    key={index} 
+                    imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
                       fullName='محمد أحمد'
                       userName='@Ibraheem216545'
                       userType='مزود خدمه '

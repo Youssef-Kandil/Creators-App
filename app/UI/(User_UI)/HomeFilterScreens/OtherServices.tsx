@@ -53,7 +53,7 @@ const OtherServices = () => {
             gap: scale_width(16),
           }}>
             {TEST_DATA.map((service, index) => {
-              return <OtherServicesCardComponent title={service.title} icon={service.imgUrl}/>
+              return <OtherServicesCardComponent key={index} title={service.title} icon={service.imgUrl}/>
             })}
         </ScrollView>
 
@@ -66,7 +66,8 @@ const OtherServices = () => {
           }}>
             {[1, 2, 3, 4].map((_, index) => {
               return(
-                <CompaniesCardComponent 
+                <CompaniesCardComponent
+                      key={index} 
                       imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
                       profileImgUrl={require("@/assets/images/Test/Profil.png") as ImageSourcePropType}
                       fullName='محمد أحمد'
@@ -90,7 +91,8 @@ const OtherServices = () => {
           }}>
             {[1, 2, 3, 4].map((_, index) => {
               return(
-                <CompaniesCardComponent 
+                <CompaniesCardComponent
+                      key={index} 
                       imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
                       profileImgUrl={require("@/assets/images/Test/Profil.png") as ImageSourcePropType}
                       fullName='محمد أحمد'

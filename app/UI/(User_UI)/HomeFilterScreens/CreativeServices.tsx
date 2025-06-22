@@ -68,7 +68,7 @@ const CreativeServices = () => {
             gap: scale_width(16),
           }}>
             {TEST_DATA.map((service, index) => {
-              return <ServicesCardComponent title={service.title} icon={service.imgUrl}/>
+              return <ServicesCardComponent key={index}  title={service.title} icon={service.imgUrl}/>
             })}
         </ScrollView>
 
@@ -81,7 +81,8 @@ const CreativeServices = () => {
           }}>
             {[1, 2, 3, 4].map((_, index) => {
               return(
-                <CreatorCardComponent 
+                <CreatorCardComponent
+                key={index} 
                 imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
                       fullName='محمد أحمد'
                       userName='@Ibraheem216545'
@@ -103,6 +104,7 @@ const CreativeServices = () => {
             {[1, 2, 3, 4].map((_, index) => {
               return(
                 <CreatorCardComponent 
+                key={index}
                 imgUrl={require("@/assets/images/Test/Card.png") as ImageSourcePropType}
                       fullName='محمد أحمد'
                       userName='@Ibraheem216545'

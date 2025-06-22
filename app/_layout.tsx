@@ -13,6 +13,7 @@ import { usePathname } from 'expo-router';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { Platform } from 'react-native';
+import LocalStorage from '@/utils/LocalStorage';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -58,6 +59,10 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const pathname = usePathname();
   console.log(Platform.OS,pathname)
+  useEffect(()=>{
+    // LocalStorage.deleteAllData()
+  },[])
+  
 
   return (
     <ThemeProvider  value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -74,8 +79,13 @@ function RootLayoutNav() {
         <Stack.Screen name="Auth/CreateNewPassword" options={{headerShown: false,animation:'ios_from_left' }} />
         <Stack.Screen name="Auth/OTP" options={{headerShown: false,animation:'ios_from_left' }} />
 
+        <Stack.Screen name="UI/(global_UI)/EditeAccountInfo" options={{headerShown: false,animation:'slide_from_right'}} />
+        <Stack.Screen name="UI/(global_UI)/ChatScreen" options={{headerShown: false,animation:'slide_from_right'}} />
+        <Stack.Screen name="UI/(global_UI)/Profile" options={{headerShown: false,animation:'slide_from_bottom' }} />
         <Stack.Screen name="UI/(global_UI)/Notifications" options={{headerShown: false,animation:'slide_from_bottom' }} />
         <Stack.Screen name="UI/(global_UI)/SearchScreen" options={{headerShown: false,animation:'slide_from_bottom' }} />
+        
+        <Stack.Screen name="UI/(User_UI)/CreateNewOrderSteps/SuccessStep" options={{headerShown: false,animation:'slide_from_bottom' }} />
       </Stack>
     </ThemeProvider>
   );

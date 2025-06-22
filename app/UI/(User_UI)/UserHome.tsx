@@ -39,6 +39,19 @@ const UserHomeScreen = () => {
         { id: 3, label: 'خدمات للتصوير' },
       ]);
 
+      const renderContent = () => {
+        switch (selectedFilter) {
+          case 'الكل':
+            return <All />;
+          case 'خدمات ابداعية':
+            return <CreativeServices />;
+          case 'خدمات للتصوير':
+            return <OtherServices />;
+          default:
+            return null;
+        }
+      };
+
       function hnadelFiltersBtnBorderColor(btnLabel:string){
         if(isDark && btnLabel === selectedFilter){
             return  ""
@@ -57,6 +70,8 @@ const UserHomeScreen = () => {
         
         
       }
+
+
 
   return (
     <View >
@@ -90,9 +105,10 @@ const UserHomeScreen = () => {
       
 
       {/* ==== START CONTANT ===== */}
-      {selectedFilter == 'الكل'? <All/>:null}
+      {/* {selectedFilter == 'الكل'? <All/>:null}
       {selectedFilter == 'خدمات ابداعية'?<CreativeServices/>:null}
-      {selectedFilter == 'خدمات للتصوير'?<OtherServices/>:null}
+      {selectedFilter == 'خدمات للتصوير'?<OtherServices/>:null} */}
+      {renderContent()}
 
     </View>
   )

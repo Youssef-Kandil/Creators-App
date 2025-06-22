@@ -1,5 +1,5 @@
-import { View, Text, TextInput, KeyboardTypeOptions, StyleSheet, useColorScheme, Platform, StatusBar } from 'react-native';
-import React, { ForwardedRef, Ref } from 'react';
+import { View, Text, TextInput, KeyboardTypeOptions, StyleSheet, useColorScheme, DimensionValue, StatusBar } from 'react-native';
+import React, { ForwardedRef, Ref, } from 'react';
 import { useRouter } from 'expo-router';
 import { Link } from 'expo-router';
 
@@ -11,8 +11,9 @@ import { useWindowDimensions } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 interface props {
-    title:string;
+    title?:string | undefined;
     placeholder:string;
+    inputWidth?:DimensionValue | undefined
 
     value:string;
     onTyping?:(text:string)=>void;
@@ -22,6 +23,9 @@ interface props {
 
     ref?: ForwardedRef<TextInput>;
     onSubmitEditing?:()=>void;
+
+    multiline?:boolean;
+    inputHeight?:DimensionValue | undefined
 }
 
 const InputComponent = ({
@@ -32,7 +36,10 @@ const InputComponent = ({
     editable=true,
     keyboardType,
     ref,
-    onSubmitEditing
+    inputWidth,
+    onSubmitEditing,
+    multiline=false,
+    inputHeight
 }:props) => {
           const theme = useColorScheme()
           const isDark = theme === 'dark';
@@ -43,12 +50,15 @@ const InputComponent = ({
           const [isFocus,setIsFocus] = React.useState<boolean>()
 
     return (
-    <View style={[styles.inpute,{width:width-scale_width(16)}]}>
-      <Text style={[styles.title,{color:themeColors.textColor}]}>{title}</Text>
+    <View style={[styles.inpute,{width:inputWidth?inputWidth:width-scale_width(16)}]}>
+        {title&& <Text style={[styles.title,{color:themeColors.textColor}]}>{title}</Text>}
       <TextInput
+        multiline={multiline}
+        numberOfLines={5}
+        textAlignVertical="top"
         keyboardType={keyboardType}
         ref={ref?ref:null} // Set the ref here
-        style={[styles.field,{color:themeColors.textColor, borderColor:isFocus?themeColors.Primary:themeColors.borderColor, opacity:isFocus?0.7:1,  borderWidth:scale_width(2)}]}
+        style={[styles.field,{minHeight:inputHeight?inputHeight:null},{color:themeColors.textColor, borderColor:isFocus?themeColors.Primary:themeColors.borderColor, opacity:isFocus?0.7:1,  borderWidth:scale_width(2)}]}
         onChangeText={(txt)=>onTyping?.(txt)} 
         placeholder={placeholder}
         placeholderTextColor={themeColors.subTextColor} 

@@ -22,8 +22,23 @@ class LocalStorage {
     };
 
     deleteData = async (key:string) => {
-        await AsyncStorage.removeItem(`${key}`);
-      };
+        try{
+
+            await AsyncStorage.removeItem(`${key}`);
+        }catch(e){
+            console.error(`Failed to Delete Key " ${key} "`, e);
+        }
+        
+    };
+
+    deleteAllData = async () => {
+        try {
+            await AsyncStorage.clear();
+            console.log('All data cleared.');
+        } catch (error) {
+            console.error('Error clearing AsyncStorage:', error);
+        }     
+    };
 };
 
 

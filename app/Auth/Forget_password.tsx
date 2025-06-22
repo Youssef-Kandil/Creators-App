@@ -18,7 +18,9 @@ import {darkThem ,lightThem} from '@/Config/app_identity'
 import { scale_width,verticalScale_hights,moderateScale_Font } from '@/utils/responsive'
 import { useWindowDimensions } from 'react-native';
 
-import AntDesign from '@expo/vector-icons/AntDesign';
+import Handle_PhoneNumbers from '@/utils/Handle_PhoneNumbers';
+import { isValidPhone } from '@/utils/Regex';
+
 
 import FormTitleComponent from '@/components/FormTitleComponent';
 import InputComponent from '@/components/InputComponent';
@@ -33,15 +35,31 @@ const Forget_password = () => {
         const { width, height } = useWindowDimensions();
         const paddingTop = Platform.OS === 'android' ? StatusBar.currentHeight : 50;
 
-        const [progNumber,setProgNumber] = useState<number>(10)
-        const handelGoToTheNextStep =()=>{
-          if (!(progNumber >= 100)) {
-            setProgNumber(progNumber+10)   
-            console.log(progNumber)
-          }
-        }
         const [phoneNumber,setPhoneNumber] = useState<string>("")
-        const [password,setPassword] = useState<string>("")
+
+        function handelRouteTo_OTPScreen(){
+          if(phoneNumber.length == 0){
+            alert("يجيب ادخال رقم الهاتف الخاص بك");
+          }
+          if(!isValidPhone(phoneNumber)){
+            alert("رقم الهاتف غير صحيح");
+          }
+
+          // ===============
+          const phoneWithCode = Handle_PhoneNumbers.addCountryCode(phoneNumber)
+          if(phoneWithCode){
+
+            const isNumberWithCode = Handle_PhoneNumbers.isPhoneWithCountryCode(phoneWithCode)
+            if(!isNumberWithCode){
+              alert("ادخل رمز دولتك في بداية الرقم");
+            }
+ 
+            const FinalResult = Handle_PhoneNumbers.removePlusSign(phoneWithCode)
+            console.log(FinalResult)
+            router.push({pathname:"/Auth/OTP",params:{FinalResult}})
+          }
+          
+        }
 
   return (
     <View style={[
@@ -58,13 +76,13 @@ const Forget_password = () => {
             />
                 <InputComponent 
                     title='رقم الهاتف' 
-                    placeholder='ادخل البريد الالكتروني هنا'
+                    placeholder='ادخل  رقم هاتفك هنا'
                     value={phoneNumber}
                     keyboardType='numeric'
                     onTyping={(text)=>setPhoneNumber(text)}/>
             <MainButtonComponent
                 title='إرسال الكود'
-                onClick={()=>router.push("/Auth/OTP")}
+                onClick={handelRouteTo_OTPScreen}
             />
     </View>
   )

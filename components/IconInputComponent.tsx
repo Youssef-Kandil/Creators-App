@@ -4,7 +4,7 @@ import { useWindowDimensions } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import {darkThem ,lightThem} from '@/Config/app_identity'
 import { scale_width, verticalScale_hights, moderateScale_Font } from '@/utils/responsive'
-import AntDesign from '@expo/vector-icons/AntDesign';
+
 
 interface props {
     Width?:DimensionValue;

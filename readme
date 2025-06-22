@@ -1,3 +1,5 @@
+fill="#FDD0A3"
+
 sudo rm -rf ~/.expo
 npx expo start -c
 
@@ -16,7 +18,7 @@ eas build --profile development --platform android
 
 git status
 git add .
-git commit -m "وصف التغييرات التي أجريتها"
+git commit -m "تحسين عرض الاعمال السابقة في البروفايل - عمل شاشات المحادثة - تنفيذ كارد الخدمات - تنفيذ شاشة اضافة خدمة جديدة - تنفيذ دروب داون"
 git push origin main
   git branch
   git remote -v
@@ -53,3 +55,188 @@ Press s │ switch to development build
 › shift+m │ more tools
 › Press o │ open project code in your editor
 › Press c │ show project QR
+
+
+
+
+    const fetchPreview_OLD = async () => {
+      try {
+        setLoading(true);
+        
+       /* === IF WE NEED TO USE Therd Part Service */ //const result = await fetchLinkPreviewData(url)
+
+        const result = await getLinkPreview(url);
+
+        // لو الصور فاضية وجربنا أقل من محاولتين، نعيد المحاولة
+        const hasImage = Array.isArray((result as any).images) && (result as any).images.length > 0;
+        if (!hasImage && attempt < maxRetries) {
+          setAttempt((prev) => prev + 1);
+          // لا نستخدم setTimeout عشان نحاول مباشرة مرتين بس
+          return;
+        }
+
+        if (isMounted) {
+          setData(result);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.log('Error fetching preview:', err);
+        if (attempt < maxRetries) {
+          setAttempt((prev) => prev + 1);
+          return;
+        } else if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+
+
+
+    import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, Image, ActivityIndicator, useColorScheme } from 'react-native';
+import { darkThem, lightThem } from '@/Config/app_identity';
+import { verticalScale_hights ,moderateScale_Font,scale_width } from '@/utils/responsive';
+import { useWindowDimensions } from 'react-native';
+import { getLinkPreview } from 'link-preview-js';
+import { Link } from 'expo-router';
+
+// === IF WE NEED TO USE Therd Part Service
+const API_KEY = 'b74015422a6e28600b127bc99f971b76';
+export async function fetchLinkPreviewData(url: string) {
+  const response = await fetch(`https://api.linkpreview.net/?key=${API_KEY}&q=${encodeURIComponent(url)}`);
+  const data = await response.json();
+  return data;
+}
+
+export default function LinkPreview({ url }: { url: string }) {
+  const theme = useColorScheme();
+  const isDark = theme === 'dark';
+  const themeColors = isDark ? darkThem : lightThem;
+  const { width, height } = useWindowDimensions();
+
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [loadingErorr, setLoadingErorr] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+
+  const maxRetries = 2; // محاولتين فقط
+
+  useEffect(() => {
+    let isMounted = true;
+
+
+    const fetchPreview = async () => {
+  try {
+    setLoading(true);
+
+    // جرّب أولاً الطريقة العادية
+    const result = await getLinkPreview(url);
+
+    const hasImage = Array.isArray((result as any).images) && (result as any).images.length > 0;
+    if (!hasImage && attempt < maxRetries) {
+      setAttempt((prev) => prev + 1);
+      return;
+    }
+
+    if (isMounted) {
+      setData(result);
+      setLoading(false);
+    }
+  } catch (err) {
+    console.log('Error with getLinkPreview:', err);
+
+    // ❌ لو فشل وأكمل المحاولات، جرّب API خارجي
+    if (attempt >= maxRetries) {
+      try {
+        const fallback = await fetchLinkPreviewData(url);
+        if (isMounted) {
+          setData({
+            ...fallback,
+            images: fallback.image ? [fallback.image] : [],
+          });
+          setLoading(false);
+        }
+      } catch (apiErr) {
+        console.log('Error with API fallback:', apiErr);
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    } else {
+      setAttempt((prev) => prev + 1);
+    }
+  }
+};
+
+
+    fetchPreview();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [url, attempt]);
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          width: verticalScale_hights(90),
+          height: verticalScale_hights(90),
+          borderRadius: verticalScale_hights(10),
+          overflow: 'hidden',
+          backgroundColor: 'rgba(70, 70, 70, 0.29)',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+
+  if (!data) {
+    return <Text>{url}</Text>;
+  }
+
+  
+  // لو الصورة فاضية بعد محاولتين، نستخدم الفافيكون بدل الصورة
+  /* === IF WE NEED TO USE Therd Part Service */ //const imageUrl = data.image
+  console.log(data)
+  
+  let imageUrl =
+    data.images && data.images.length > 0
+      ? data.images[0]
+      :  null;
+
+  if (imageUrl == null) {
+    
+  }
+      console.log("DATTTA : ", imageUrl)
+
+
+
+  return (
+    <View
+      style={{
+        width: verticalScale_hights(90),
+        height: verticalScale_hights(90),
+        borderRadius: verticalScale_hights(10),
+        overflow: 'hidden',
+        backgroundColor: 'rgba(70, 70, 70, 0.29)',
+      }}
+    >
+        <Link style={{ width: '100%', height: '100%', borderRadius: verticalScale_hights(10),marginTop:imageUrl?null:verticalScale_hights(30)}} href={url as any}>
+        {imageUrl && !loadingErorr ? (
+          <Image 
+                source={{ uri: imageUrl }} 
+                style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
+                onLoad={() => console.log("loaded")}
+                onError={() => setLoadingErorr(true)} />
+            ) :null}
+            {imageUrl == null?<Text style={{color:themeColors.textColor,fontSize:moderateScale_Font(10),textAlign:"center"}} numberOfLines={3}>لا يوجد صورة مرفقة لهذه المشروع</Text>:null}
+        </Link>
+    </View>
+  );
+}

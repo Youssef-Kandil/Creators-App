@@ -17,17 +17,18 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 interface props{
-    title:string
+    title:string;
+    isTab?:boolean;
 }
 
-const HeaderTitle = ({title}:props) => {
+const HeaderTitle = ({title,isTab=false}:props) => {
         const router = useRouter();
         const theme = useColorScheme()
         const isDark = theme === 'dark';
         const themeColors = isDark ? darkThem : lightThem;
   return (
-    <View style={{flexDirection:"row"}}>
-        <TouchableOpacity style={[styles.backBtn,{backgroundColor:theme == "dark"?"#6666":""}]} onPress={()=>router.back()}>
+    <View style={{flexDirection:"row", alignItems:"center",marginBottom:verticalScale_hights(30),}}>
+        <TouchableOpacity style={[styles.backBtn,{backgroundColor:theme == "dark"?"#6666":""}]} onPress={()=>isTab?router.navigate('/(tabs)/Home'):router.back()}>
             <AntDesign name="arrowright" size={scale_width(15.7)} color={themeColors.textColor} />
         </TouchableOpacity>
         <View style={[styles.titleContainer]}>
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
         borderRadius:scale_width(50),
         alignItems:"center",
         justifyContent:"center",
-        marginBottom:verticalScale_hights(30),
     },
 
     titleContainer:{

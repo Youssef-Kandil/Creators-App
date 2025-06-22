@@ -59,7 +59,12 @@ const Login = () => {
 
 
         function handelLogin(){
-            if(email.length > 0 && password.length > 0 && isCreator){
+            if(email.length > 0 && password.length > 0 ){
+                if (isCreator) {
+                    LocalStorage.SaveData("userType","1")
+                }else{
+                    LocalStorage.SaveData("userType","0")
+                }
                 LocalStorage.SaveData("isLogedIn","1")
                 router.replace('/(tabs)/Home')
             }else{
@@ -79,7 +84,7 @@ const Login = () => {
         ]} >
 
             <FormTitleComponent
-                title='مرحبًا، مرحبًا بعودتك! 👋'
+                title='اهلا، مرحبًا بعودتك! 👋'
                 subTitle='مرحبا مره اخري! الرجاء إدخال معلومات حسابك' 
             />
             <View>
